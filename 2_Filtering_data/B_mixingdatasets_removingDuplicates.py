@@ -9,14 +9,15 @@ import pandas as pd
 import numpy as np
 from datetime import datetime,time,date
 
-df1 = pd.read_csv('dataset_mentionHillary_clean.csv',sep=',',error_bad_lines=False,na_values=[''])
+df1 = pd.read_csv('dataset_mentionTrump.csv',sep=',',error_bad_lines=False,na_values=[''])
 
-df2 = pd.read_csv('dataset_mentionHillary_week2_clean.csv',sep=',',error_bad_lines=False,na_values=[''])
+df2 = pd.read_csv('dataset_mentionHillary.csv',sep=',',error_bad_lines=False,na_values=[''])
 
 frames = [df1, df2]
 result = pd.concat(frames)
 
-result.to_csv('dataset_mentionHillary.csv',index=False)
+final = result.drop_duplicates(['id_Tweet'])
+final.to_csv('dataset_mentions.csv',index=False)
 
 print len(df1.index)
 print len(df2.index)
